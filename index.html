@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GymBuddy Pro — AI Fitness Coach</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="loading-overlay" id="loader">
+  <div class="loader-inner">
+    <div class="loader-ring"></div>
+    <p>INITIALIZING AI COACH...</p>
+  </div>
+</div>
+
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-icon">🏋️</span>
+      <div>
+        <h1>GymBuddy</h1>
+        <p>AI Fitness Coach</p>
+      </div>
+    </div>
+
+    <div class="section-title">SELECT EXERCISE</div>
+    <div class="exercise-grid">
+      <button class="ex-btn active" data-ex="squat">🦵 Squat</button>
+      <button class="ex-btn" data-ex="pushup">💪 Push-up</button>
+      <button class="ex-btn" data-ex="lunge">🚶 Lunge</button>
+      <button class="ex-btn" data-ex="bicep_curl">💪 Bicep Curl</button>
+      <button class="ex-btn" data-ex="shoulder_press">🏋️ Shoulder Press</button>
+      <button class="ex-btn" data-ex="deadlift">🏋️ Deadlift</button>
+      <button class="ex-btn" data-ex="plank">⏱️ Plank</button>
+      <button class="ex-btn" data-ex="jumping_jack">⚡ Jumping Jack</button>
+    </div>
+
+    <div class="section-title" style="margin-top:20px">SESSION STATS</div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <span class="stat-val" id="statReps">0</span>
+        <span class="stat-label">REPS</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="statSets">0</span>
+        <span class="stat-label">SETS</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="statCal">0</span>
+        <span class="stat-label">KCAL</span>
+      </div>
+      <div class="stat-box">
+        <span class="stat-val" id="statTime">0:00</span>
+        <span class="stat-label">TIME</span>
+      </div>
+    </div>
+
+    <div class="form-score-wrap">
+      <div class="form-score-header">
+        <span>FORM SCORE</span>
+        <span id="formScoreVal">100%</span>
+      </div>
+      <div class="form-bar-bg">
+        <div class="form-bar-fill" id="formBar"></div>
+      </div>
+    </div>
+
+    <div class="action-btns">
+      <button class="btn-start" onclick="startSession()">▶ Start Session</button>
+      <button class="btn-set" onclick="completeSet()">✓ Complete Set</button>
+      <button class="btn-reset" onclick="resetSession()">↺ Reset</button>
+    </div>
+
+    <div class="section-title" style="margin-top:20px">ANALYZE VIDEO</div>
+    <div class="upload-area" id="uploadArea">
+      <input type="file" id="videoFile" accept="video/*" onchange="previewUpload(this)">
+      <span>📁 Drop video or click</span>
+    </div>
+    <button class="btn-analyze" onclick="analyzeVideo()">🔍 Analyze Video</button>
+    <div id="uploadResult"></div>
+  </aside>
+
+  <main class="main">
+    <div class="camera-section">
+      <div class="camera-header">
+        <span class="cam-title">📹 LIVE CAMERA</span>
+        <div class="cam-controls">
+          <button class="cam-btn active" id="btnLive" onclick="switchMode('live')">LIVE</button>
+          <button class="cam-btn" id="btnUpload" onclick="switchMode('upload')">UPLOAD</button>
+        </div>
+      </div>
+      <div class="camera-wrap" id="liveView">
+        <img src="/video_feed" id="camFeed" alt="Camera Feed">
+        <div class="cam-overlay">
+          <div class="cam-corner tl"></div>
+          <div class="cam-corner tr"></div>
+          <div class="cam-corner bl"></div>
+          <div class="cam-corner br"></div>
+        </div>
+        <div class="cam-badge" id="exerciseBadge">SQUAT</div>
+      </div>
+      <div class="upload-view" id="uploadView" style="display:none">
+        <video id="uploadPreview" controls style="width:100%;border-radius:12px"></video>
+        <div class="upload-placeholder" id="uploadPlaceholder">
+          <span>📤</span>
+          <p>Upload a video to analyze form</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="feedback-banner" id="feedbackBanner">
+      <span class="feedback-icon">💬</span>
+      <span id="feedbackText">Ready! Select an exercise and start your session.</span>
+    </div>
+
+    <div class="errors-wrap" id="errorsWrap"></div>
+
+    <div class="history-section">
+      <div class="section-title">SET HISTORY</div>
+      <div class="history-list" id="historyList">
+        <div class="no-history">No sets completed yet. Start your session!</div>
+      </div>
+    </div>
+
+    <div class="tips-section" id="tipsSection">
+      <div class="section-title">FORM TIPS</div>
+      <div class="tips-grid" id="tipsGrid"></div>
+    </div>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

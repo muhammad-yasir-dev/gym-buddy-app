@@ -1,2 +1,2 @@
-# gym-buddy-app
-A interactive fitness application designed to track workouts, manage fitness goals, and structure personal training routines.
+# GymBuddy-Pro-AI-Fitness-Coach
+AI fitness coach with real-time pose detection
